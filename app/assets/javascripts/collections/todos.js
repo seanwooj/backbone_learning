@@ -6,6 +6,7 @@ window.Todo.Collections.Todos = Backbone.Collection.extend({
     var model;
     var todos = this;
     if (model = this.get(id)) {
+      model.fetch();
       return model
     } else {
       model = new Todo.Models.Todo({ id: id });
