@@ -20,9 +20,18 @@ class Api::CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = TodoComment.find(params[:id])
     @comment.destroy
     render "comments/show"
+  end
+
+  def update
+    @comment = TodoComment.find(params[:id])
+    if @comment.update_attributes(comment_params)
+      render "comments/show"
+    else
+      render :json => @comment.errors, :status => :unprocessable_entity
+    end
   end
 
   private
